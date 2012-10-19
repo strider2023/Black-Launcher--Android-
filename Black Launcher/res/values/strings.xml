@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Black</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="information">App Info</string>
+    <string name="cancel">Cancel</string>
+    <string name="apps">Apps</string>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:background="@android:color/black">
+    
+    
+    
+    <SlidingDrawer
+        android:id="@+id/launcher_all_apps_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:handle="@+id/launcher_app_handle"
+        android:content="@+id/launcher_apps_list">
+        
+        <LinearLayout 
+            android:id="@+id/launcher_app_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="top"
+            android:background="@android:color/black">
+  		    
+	  		<ImageView
+	  		    android:id="@+id/launcher_drawer_direction_icon"
+	  		    android:layout_marginTop="5dp"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:src="@drawable/ic_nav_arrow"
+			    android:background="@android:color/transparent"/>
+	  		
+	  		<View
+	  		    android:layout_width="match_parent"
+	  		    android:layout_height="match_parent"
+	  		    android:background="@android:color/transparent"/>
+  		
+  		</LinearLayout>
+        
+	    <fragment 
+	        android:id="@+id/launcher_apps_list"
+	        android:name="com.touchmentapps.black.BlackLauncherFragment"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"/>
+        
+    </SlidingDrawer>
+    
+</RelativeLayout>
