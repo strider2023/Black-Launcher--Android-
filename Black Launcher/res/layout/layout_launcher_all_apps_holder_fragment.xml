@@ -3,8 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    android:background="@android:color/black">
+    android:background="@android:color/transparent">
     
+    <CheckBox 
+        android:id="@+id/launcher_all_apps_search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+        android:button="@android:drawable/ic_menu_search"/>
+            
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,14 +24,14 @@
             android:id="@+id/launcher_all_apps_counter_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="60dp"
             android:textStyle="bold"/>
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="16dp"
             android:paddingLeft="5dp"
             android:text="@string/apps"/>
@@ -32,10 +39,13 @@
     </LinearLayout>
     
     <ScrollView 
+        android:layout_toRightOf="@+id/launcher_all_apps_search_btn"
+        android:layout_below="@+id/launcher_all_apps_search_textview"
         android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:scrollbars="none"
-	    android:fadingEdge="none">
+	    android:fadingEdge="none"
+	    android:overScrollMode="never">
     
 	    <LinearLayout 
 	        android:id="@+id/launcher_all_apps_holder"
@@ -44,5 +54,27 @@
 	        android:orientation="vertical"/>
     
     </ScrollView>
+    
+    <ProgressBar 
+        android:id="@+id/launcher_all_apps_loading_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    
+    <EditText
+        android:id="@+id/launcher_all_apps_search_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/launcher_all_apps_search_btn"
+        android:singleLine="true"
+        android:inputType="textNoSuggestions"
+        android:hint="@string/search_an_app"
+        android:imeOptions="actionDone"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:visibility="gone"/>
 
 </RelativeLayout>

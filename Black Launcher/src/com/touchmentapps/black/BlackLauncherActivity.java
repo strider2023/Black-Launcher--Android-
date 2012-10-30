@@ -1,16 +1,24 @@
 package com.touchmentapps.black;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.SlidingDrawer;
-import android.widget.SlidingDrawer.OnDrawerCloseListener;
-import android.widget.SlidingDrawer.OnDrawerOpenListener;
+import java.util.ArrayList;
 
-public class BlackLauncherActivity extends Activity {
+import com.touchmentapps.black.adapters.LauncherViewPagerAdapter;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+
+/**
+ * 
+ * @author Arindam Nath
+ * 
+ */
+public class BlackLauncherActivity extends FragmentActivity {
 	
-	private SlidingDrawer mAppsListDrawer;
-	private ImageView mDrawerArrowImage;
+	private ViewPager mLauncherViewHolder;
+	private ArrayList<Fragment> mFragmentObjects = new ArrayList<Fragment>(0);
+	private LauncherViewPagerAdapter mFragmentAdapter;
 		
     /** Called when the activity is first created. */
     @Override
@@ -18,21 +26,14 @@ public class BlackLauncherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        mAppsListDrawer = (SlidingDrawer) findViewById(R.id.launcher_all_apps_drawer);
-        mDrawerArrowImage = (ImageView) findViewById(R.id.launcher_drawer_direction_icon);
+        mFragmentAdapter = new LauncherViewPagerAdapter(getSupportFragmentManager());
         
-        mAppsListDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
-			@Override
-			public void onDrawerOpened() {
-				mDrawerArrowImage.animate().rotationBy(-180);
-			}
-		});
+        mLauncherViewHolder = (ViewPager) findViewById(R.id.launcher_home_view_pager);
         
-        mAppsListDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
-			@Override
-			public void onDrawerClosed() {
-				mDrawerArrowImage.animate().rotationBy(180);
-			}
-		});
+        mFragmentObjects.add(new BlackHomeScreenFragement());
+        mFragmentObjects.add(new BlackAllAppsMenuFragment());
+                
+        mFragmentAdapter.setFragmentSources(mFragmentObjects);
+        mLauncherViewHolder.setAdapter(mFragmentAdapter);
     }
 }

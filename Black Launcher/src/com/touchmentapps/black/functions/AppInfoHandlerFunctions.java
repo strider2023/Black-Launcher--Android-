@@ -23,26 +23,46 @@ public class AppInfoHandlerFunctions {
 	 * @param getSysPackages
 	 * @return
 	 */
-	public ArrayList<LauncherPackageInfo> getAppsList(boolean getSysPackages) {
+	public ArrayList<LauncherPackageInfo> getAppsList(boolean getSysPackages, String filterText) {
     	ArrayList<LauncherPackageInfo> res = new ArrayList<LauncherPackageInfo>();                
         List<ApplicationInfo> packages = mContext.getPackageManager()
         		                .getInstalledApplications(PackageManager.GET_META_DATA);
         
-		for (ApplicationInfo packageInfo : packages) {		
-			if(!getSysPackages) {
-				if(mContext.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName) != null) {
+        if(filterText != null && filterText.length() > 0) {
+			for (ApplicationInfo packageInfo : packages) {		
+				if(!getSysPackages) {
+					if(mContext.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName) != null) {
+						if(packageInfo.loadLabel(mContext.getPackageManager()).toString().startsWith(filterText))
+							res.add(new LauncherPackageInfo(
+									packageInfo.loadLabel(mContext.getPackageManager()).toString(), 
+									packageInfo.packageName,
+				            		packageInfo.loadIcon(mContext.getPackageManager())));
+					}	
+				} else {
+					if(packageInfo.loadLabel(mContext.getPackageManager()).toString().startsWith(filterText))
+						res.add(new LauncherPackageInfo(
+								packageInfo.loadLabel(mContext.getPackageManager()).toString(), 
+								packageInfo.packageName,
+			            		packageInfo.loadIcon(mContext.getPackageManager())));
+				}
+			}
+        } else {
+        	for (ApplicationInfo packageInfo : packages) {		
+				if(!getSysPackages) {
+					if(mContext.getPackageManager().getLaunchIntentForPackage(packageInfo.packageName) != null) {
+						res.add(new LauncherPackageInfo(
+								packageInfo.loadLabel(mContext.getPackageManager()).toString(), 
+								packageInfo.packageName,
+				           		packageInfo.loadIcon(mContext.getPackageManager())));
+					}	
+				} else {
 					res.add(new LauncherPackageInfo(
 							packageInfo.loadLabel(mContext.getPackageManager()).toString(), 
 							packageInfo.packageName,
-		            		packageInfo.loadIcon(mContext.getPackageManager())));
-				}	
-			} else {
-				res.add(new LauncherPackageInfo(
-						packageInfo.loadLabel(mContext.getPackageManager()).toString(), 
-						packageInfo.packageName,
-	            		packageInfo.loadIcon(mContext.getPackageManager())));
+			           		packageInfo.loadIcon(mContext.getPackageManager())));
+				}
 			}
-		}
+        }
         Log.i("Test", "Size " + res.size() + " Packages " + packages.size());
         return res;  
     }

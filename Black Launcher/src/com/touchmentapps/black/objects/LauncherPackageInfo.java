@@ -30,7 +30,7 @@ public class LauncherPackageInfo {
 	/**
 	 * @return the pname
 	 */
-	public String getPname() {
+	public String getPackageName() {
 		return pname;
 	}
 

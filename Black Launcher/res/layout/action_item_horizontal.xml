@@ -5,12 +5,13 @@
     android:layout_height="wrap_content" 
     android:clickable="true"
     android:focusable="true"
-    android:background="@drawable/selector_launcher_app_btn">
+    android:background="@drawable/selector_action_item">
             
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/empty"/>
 
     <TextView 
         android:id="@+id/tv_title"

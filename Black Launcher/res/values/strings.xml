@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="empty"></string>
     <string name="app_name">Black</string>
     <string name="uninstall">Uninstall</string>
     <string name="information">App Info</string>
     <string name="cancel">Cancel</string>
     <string name="apps">Apps</string>
+    <string name="package_not_found_error">Application not found!</string>
+    <string name="search_an_app">Search Apps</string>
 </resources>
