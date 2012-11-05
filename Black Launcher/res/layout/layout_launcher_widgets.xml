@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/launcher_widget_container_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/launcher_widget_holder_height">
+    
+    <ImageView 
+        android:id="@+id/launcher_widget_preview_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/launcher_widget_holder_height"
+        android:padding="3dp"
+        android:scaleType="centerInside"
+        android:drawingCacheQuality="high"
+        android:contentDescription="@string/empty"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#BB232323"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp">
+        
+        <ImageView 
+	        android:id="@+id/launcher_widget_icon"
+	        android:layout_width="@dimen/launcher_widget_icon_size"
+	        android:layout_height="@dimen/launcher_widget_icon_size"
+	        android:scaleType="centerInside"
+	        android:contentDescription="@string/empty"/> 
+        
+       <com.touchmentapps.black.widgets.AppTextView
+		    android:id="@+id/launcher_widget_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="14dp"
+			android:paddingLeft="3dip"
+			android:textColor="@android:color/white"
+			android:shadowDx="1"
+			android:shadowDy="1"
+			android:shadowRadius="1"
+			android:shadowColor="@android:color/black"/>
+	        
+    </LinearLayout>
+       
+</RelativeLayout>

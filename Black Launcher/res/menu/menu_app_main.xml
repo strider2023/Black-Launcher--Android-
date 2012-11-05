@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_set_wallpaper"
+        android:showAsAction="always"
+        android:title="@string/wallpapers"/>
+    <item
+        android:id="@+id/action_manage_apps"
+        android:showAsAction="always"
+        android:title="@string/manage_apps"/>
+    <item
+        android:id="@+id/action_system_settings"
+        android:showAsAction="always"
+        android:title="@string/system_settings"/>
+</menu>
