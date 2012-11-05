@@ -2,44 +2,104 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:background="@android:color/transparent">
+    android:padding="3dp"
+    android:background="#CC000000">
     
-    <CheckBox 
-        android:id="@+id/launcher_all_apps_search_btn"
-        android:layout_width="wrap_content"
+    <SlidingDrawer
+        android:id="@+id/launcher_all_apps_quick_actions_drawer"
+        android:orientation="vertical"
+        android:layout_width="@dimen/launcher_home_drawer_width"
         android:layout_height="wrap_content"
-        android:layout_marginRight="2dp"
-        android:button="@android:drawable/ic_menu_search"/>
+        android:handle="@+id/quick_actions_drawer_handle"
+        android:content="@+id/quick_actions_drawer_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/launcher_all_apps_screen_header_text">
+        
+        <LinearLayout
+            android:id="@+id/quick_actions_drawer_handle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/selector_action_item">
             
-    <LinearLayout
+            <ImageView
+                android:id="@+id/quick_actions_drawer_handle_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_drawer_arrow"
+                android:contentDescription="@string/empty"/>  
+                
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                android:contentDescription="@string/empty"/>
+            
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/quick_actions_drawer_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <CheckBox 
+		        android:id="@+id/launcher_all_apps_search_btn"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:padding="2dp"
+		        android:button="@drawable/ic_home_search_normal_holo"/>
+            
+            <ImageButton 
+		        android:id="@+id/launcher_all_apps_market_btn"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:padding="2dp"
+		        android:src="@drawable/ic_launcher_market_holo"
+		        android:background="@drawable/selector_action_item"
+		        android:contentDescription="@string/empty"/>
+            
+            <ImageButton 
+		        android:id="@+id/launcher_all_apps_settings_btn"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:padding="2dp"
+		        android:src="@drawable/ic_settings"
+		        android:background="@drawable/selector_action_item"
+		        android:contentDescription="@string/empty"/>
+            
+        </LinearLayout>
+        
+    </SlidingDrawer>
+    
+    <com.touchmentapps.black.widgets.AppTextView 
+        android:id="@+id/launcher_all_apps_screen_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:orientation="horizontal"
-        android:gravity="bottom">
-        
-        <TextView 
-            android:id="@+id/launcher_all_apps_counter_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="60dp"
-            android:textStyle="bold"/>
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="16dp"
-            android:paddingLeft="5dp"
-            android:text="@string/apps"/>
-        
-    </LinearLayout>
+        android:textColor="@android:color/white"
+        android:textSize="48dp"
+        android:textStyle="bold"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="3"
+        android:paddingBottom="2dp"
+        android:layout_alignParentRight="true"/>
     
+    <com.touchmentapps.black.widgets.AppTextView 
+        android:id="@+id/launcher_all_apps_screen_header_count_text"
+        android:layout_toLeftOf="@+id/launcher_all_apps_screen_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="48dp"
+        android:textStyle="bold"
+        android:paddingBottom="2dp"
+        android:paddingRight="5dp"
+        android:visibility="gone"/>
+                
     <ScrollView 
-        android:layout_toRightOf="@+id/launcher_all_apps_search_btn"
+        android:layout_toRightOf="@+id/launcher_all_apps_quick_actions_drawer"
         android:layout_below="@+id/launcher_all_apps_search_textview"
         android:layout_width="match_parent"
 	    android:layout_height="match_parent"
@@ -51,9 +111,25 @@
 	        android:id="@+id/launcher_all_apps_holder"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:orientation="vertical"/>
+	        android:orientation="vertical"
+	        android:visibility="gone"/>
     
     </ScrollView>
+    
+    <GridView 
+	    android:id="@+id/launcher_all_widgets_holder"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:numColumns="auto_fit"
+	    android:horizontalSpacing="2dp"
+	    android:verticalSpacing="2dp"
+	    android:stretchMode="columnWidth"
+	    android:scrollbars="none"
+	    android:fadingEdge="none"
+	    android:overScrollMode="never"
+	    android:visibility="gone"
+	    android:layout_toRightOf="@+id/launcher_all_apps_quick_actions_drawer"
+        android:layout_below="@+id/launcher_all_apps_search_textview"/> 
     
     <ProgressBar 
         android:id="@+id/launcher_all_apps_loading_progress_bar"
@@ -66,7 +142,6 @@
         android:id="@+id/launcher_all_apps_search_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/launcher_all_apps_search_btn"
         android:singleLine="true"
         android:inputType="textNoSuggestions"
         android:hint="@string/search_an_app"
@@ -75,6 +150,8 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="3"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_toRightOf="@+id/launcher_all_apps_quick_actions_drawer"
+        android:layout_below="@+id/launcher_all_apps_screen_header_text"/>
 
 </RelativeLayout>

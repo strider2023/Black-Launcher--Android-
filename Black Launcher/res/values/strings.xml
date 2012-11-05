@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="password_protected">Password Protected:</string>
     <string name="empty"></string>
     <string name="app_name">Black</string>
     <string name="uninstall">Uninstall</string>
     <string name="information">App Info</string>
+    <string name="pin_to_start">Pin to Start Menu</string>
     <string name="cancel">Cancel</string>
     <string name="apps">Apps</string>
     <string name="package_not_found_error">Application not found!</string>
     <string name="search_an_app">Search Apps</string>
+    <string name="app_version_name">Version Name:</string>
+    <string name="close">Close</string>
+    <string name="set_passowrd">Set Password</string>
+    <string name="remove_password">Remove Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="widgets">Widgets</string>
+    <string name="wallpapers">Wallpapers</string>
+    <string name="choose_wallpaper">Choose Wallpaper</string>
+    <string name="manage_apps">Manage Apps</string>
+    <string name="system_settings">System settings</string>
+    <string name="google">Google</string>
 </resources>

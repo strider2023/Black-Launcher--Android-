@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:background="#CC000000">
+    android:orientation="horizontal">
     
     <android.support.v4.view.ViewPager
 	    android:id="@+id/launcher_home_view_pager"

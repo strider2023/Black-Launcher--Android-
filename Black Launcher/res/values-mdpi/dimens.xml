@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="launcher_application_width">55dp</dimen>
-    <dimen name="launcher_application_height">70dp</dimen>
-    <dimen name="launcher_list_text_size">48dp</dimen>
-    <dimen name="launcher_home_margin_right">32dp</dimen>
+    <dimen name="launcher_app_icon_size">48dp</dimen>
+    <dimen name="launcher_widget_icon_size">24dp</dimen>
+    <dimen name="launcher_widget_holder_height">144dp</dimen>
+    <dimen name="launcher_home_drawer_width">32dp</dimen>
 </resources>
