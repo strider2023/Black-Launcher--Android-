@@ -6,6 +6,7 @@ import com.touchmentapps.black.functions.AppInfoHandlerFunctions;
 import com.touchmentapps.black.objects.LauncherApplicationInfo;
 import com.touchmentapps.black.views.LauncherMenuItem;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +47,11 @@ public class BlackAllAppsMenuFragment extends Fragment {
 	private TextView mHeaderText, mHeaderCountText;
 	private ArrayList<LauncherApplicationInfo> mInfo;
 	private AppInfoHandlerFunctions mAppInfoFunctions;
+	private OnPinAppSelectedListener mCallback;
+	
+	public interface OnPinAppSelectedListener {
+        public void onPinAppSelected(LauncherApplicationInfo selectedItem);
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,6 +125,18 @@ public class BlackAllAppsMenuFragment extends Fragment {
 		return fragmentView;
 	}
 	
+	@Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception.
+        try {
+            mCallback = (OnPinAppSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnHeadlineSelectedListener");
+        }
+    }
+	
 	private class FilterAppsList extends AsyncTask<Void,Void,Void>{
 		
 		private ArrayList<LauncherApplicationInfo> mFilteredList;
@@ -150,7 +168,7 @@ public class BlackAllAppsMenuFragment extends Fragment {
         		mLoaderProgress.setVisibility(ProgressBar.GONE);
         		mHeaderCountText.setText(String.valueOf(mFilteredList.size()));
 	        	for(LauncherApplicationInfo info : mFilteredList ) 
-	        		mHolderLayout.addView(new LauncherMenuItem(getActivity(), info).getItemView());
+	        		mHolderLayout.addView(new LauncherMenuItem(getActivity(), info, mCallback).getItemView());
         	}
         }
     }
@@ -177,7 +195,7 @@ public class BlackAllAppsMenuFragment extends Fragment {
         		mHeaderCountText.setText(String.valueOf(mInfo.size()));
         		mLoaderProgress.setVisibility(ProgressBar.GONE);
 	        	for(LauncherApplicationInfo info : mInfo ) 
-	        		mHolderLayout.addView(new LauncherMenuItem(getActivity(), info).getItemView());
+	        		mHolderLayout.addView(new LauncherMenuItem(getActivity(), info, mCallback).getItemView());
         	}
         }
     }

@@ -1,6 +1,7 @@
 package com.touchmentapps.black.views;
 
 import com.touchmentapps.black.R;
+import com.touchmentapps.black.BlackAllAppsMenuFragment.OnPinAppSelectedListener;
 import com.touchmentapps.black.actionitem.ActionItem;
 import com.touchmentapps.black.actionitem.QuickAction;
 import com.touchmentapps.black.actionitem.QuickAction.OnDismissListener;
@@ -49,13 +50,16 @@ public class LauncherMenuItem {
 	private ImageView mIcon;
 	private View holderView;
 	private Context mContext;
+	private OnPinAppSelectedListener mCallback;
 	
 	private ActionItem infoItem, deleteItem, pinItem, passwordItem;
 	private QuickAction quickAction;
 
-	public LauncherMenuItem(Context context, LauncherApplicationInfo packageInfo) {
+	public LauncherMenuItem(Context context, LauncherApplicationInfo packageInfo,
+			OnPinAppSelectedListener callback) {
 		this.mContext = context;
 		this.mPackageInfo = packageInfo;
+		this.mCallback = callback;
 		mInflater = LayoutInflater.from(context);
 		holderView = mInflater.inflate(R.layout.layout_launcher_application, null);
 		mText = (TextView) holderView.findViewById(R.id.launcher_application_name);
@@ -72,7 +76,7 @@ public class LauncherMenuItem {
 		quickAction.addActionItem(passwordItem);
 		quickAction.addActionItem(deleteItem);
 	}
-	
+		
 	public View getItemView() {
 		mText.setText(mPackageInfo.getAppname());
 		mIcon.setImageDrawable(mPackageInfo.getIcon());
@@ -109,6 +113,7 @@ public class LauncherMenuItem {
 				switch(actionId) {
 				case ID_PIN_TO_START_MENU:
 					quickAction.dismiss();
+					mCallback.onPinAppSelected(mPackageInfo);
 					break;
 				case ID_INFO:
 					quickAction.dismiss();

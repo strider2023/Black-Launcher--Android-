@@ -1,7 +1,15 @@
 package com.touchmentapps.black;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.touchmentapps.black.dragview.DeleteZone;
+import com.touchmentapps.black.dragview.DragController.DragListener;
+import com.touchmentapps.black.dragview.DragLayer;
+import com.touchmentapps.black.dragview.DragSource;
+import com.touchmentapps.black.dragview.LauncherGridAdapter;
+import com.touchmentapps.black.dragview.LauncherGridItem;
+import com.touchmentapps.black.objects.LauncherApplicationInfo;
 import com.touchmentapps.black.objects.LauncherWidgetInfo;
 
 import android.appwidget.AppWidgetHost;
@@ -19,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -32,6 +41,12 @@ public class BlackHomeScreenFragement extends Fragment {
 	private LinearLayout mHomeScreen;
 	private TextView mHomeSearchBar;
 	
+	private GridView grid;
+	private ArrayList<LauncherGridItem> items;
+	private DeleteZone deleteZone;
+	private DragLayer dragLayer;
+	private LauncherGridAdapter adapter;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -39,7 +54,10 @@ public class BlackHomeScreenFragement extends Fragment {
 		mHolderLayout = inflater.inflate(R.layout.layout_home_screen, null);
 		mHomeScreen = (LinearLayout) mHolderLayout.findViewById(R.id.home_sreen_container_layout);
 		mHomeSearchBar = (TextView) mHolderLayout.findViewById(R.id.home_screen_search_bar);
-		
+		deleteZone = (DeleteZone) mHolderLayout.findViewById(R.id.delete_zone_view);
+		dragLayer = (DragLayer) mHolderLayout.findViewById(R.id.drag_layer);
+		grid = (GridView) mHolderLayout.findViewById(R.id.image_grid_view);
+				
 		mHomeSearchBar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -52,7 +70,29 @@ public class BlackHomeScreenFragement extends Fragment {
 				  }
 			}
 		});
+		/*if (getActivity().getScreenOrientation() == 1)
+			grid.setNumColumns(3);
+		else
+			grid.setNumColumns(4);*/
+
+		items = new ArrayList<LauncherGridItem>(0);
 		
+		adapter = new LauncherGridAdapter(getActivity(), grid, dragLayer, deleteZone);
+		adapter.setDragListener(new DragListener() {
+			@Override
+			public void onDragStart(DragSource source, Object info, int dragAction) {
+				deleteZone.setVisibility(View.VISIBLE);
+			}
+			
+			@Override
+			public void onDragEnd() {
+				deleteZone.setVisibility(View.GONE);
+			}
+		});
+		
+		adapter.setEditable(true); // change this to false to disable drag & drop.
+		grid.setAdapter(adapter);
+				
 		return mHolderLayout;
 	}
 	
@@ -62,6 +102,15 @@ public class BlackHomeScreenFragement extends Fragment {
         mAppWidgetHost.startListening();
     }
 	
+	public void addApplication(LauncherApplicationInfo mAppInfo) {		
+			Intent mApplicationIntent = getActivity().getPackageManager().getLaunchIntentForPackage(mAppInfo.getPackageName());
+			mApplicationIntent.putExtra("Param1", "Activity " + mAppInfo.getAppname());
+			items.add(new LauncherGridItem(mAppInfo.getIcon(), mAppInfo.getAppname(),mApplicationIntent));		
+			adapter.notifyDataSetChanged();
+			adapter.setItems(items);
+			grid.setAdapter(adapter);
+	}
+		
 	public void addWidget(LauncherWidgetInfo mWidgetInfo) {
 		Log.i("Package Name From Widget Info", mWidgetInfo.getAppWidgetInfo().provider.getPackageName());	
 		int appWidgetId = mAppWidgetHost.allocateAppWidgetId();

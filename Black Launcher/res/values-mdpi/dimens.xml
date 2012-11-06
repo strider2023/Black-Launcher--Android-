@@ -3,5 +3,5 @@
     <dimen name="launcher_app_icon_size">48dp</dimen>
     <dimen name="launcher_widget_icon_size">24dp</dimen>
     <dimen name="launcher_widget_holder_height">144dp</dimen>
-    <dimen name="launcher_home_drawer_width">32dp</dimen>
+    <dimen name="launcher_home_drawer_width">40dp</dimen>
 </resources>

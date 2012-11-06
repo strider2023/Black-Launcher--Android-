@@ -53,6 +53,7 @@
                 <category android:name="android.intent.category.MONKEY"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Activity2"/>
     </application>
 
 </manifest>

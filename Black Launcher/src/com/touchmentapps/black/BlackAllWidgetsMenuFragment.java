@@ -42,7 +42,7 @@ public class BlackAllWidgetsMenuFragment extends Fragment {
 		mWidgetsHolderLayout = (GridView) fragmentView.findViewById(R.id.launcher_all_widgets_holder);
 		mWidgetsHolderLayout.setVisibility(GridView.VISIBLE);
 		mQuickActionsDrawer = (SlidingDrawer) fragmentView.findViewById(R.id.launcher_all_apps_quick_actions_drawer);
-		mQuickActionsDrawer.setVisibility(SlidingDrawer.INVISIBLE);
+		mQuickActionsDrawer.setVisibility(SlidingDrawer.GONE);
 		mHeaderText = (TextView) fragmentView.findViewById(R.id.launcher_all_apps_screen_header_text);
 		mLoaderProgress = (ProgressBar) fragmentView.findViewById(R.id.launcher_all_apps_loading_progress_bar);
 		

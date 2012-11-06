@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/selector_action_item">
+            android:background="@drawable/selector_action_item"
+            android:gravity="center_horizontal">
             
             <ImageView
                 android:id="@+id/quick_actions_drawer_handle_image"
@@ -41,20 +42,19 @@
             android:id="@+id/quick_actions_drawer_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
             
             <CheckBox 
 		        android:id="@+id/launcher_all_apps_search_btn"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:padding="2dp"
 		        android:button="@drawable/ic_home_search_normal_holo"/>
             
             <ImageButton 
 		        android:id="@+id/launcher_all_apps_market_btn"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:padding="2dp"
 		        android:src="@drawable/ic_launcher_market_holo"
 		        android:background="@drawable/selector_action_item"
 		        android:contentDescription="@string/empty"/>
@@ -63,7 +63,6 @@
 		        android:id="@+id/launcher_all_apps_settings_btn"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:padding="2dp"
 		        android:src="@drawable/ic_settings"
 		        android:background="@drawable/selector_action_item"
 		        android:contentDescription="@string/empty"/>

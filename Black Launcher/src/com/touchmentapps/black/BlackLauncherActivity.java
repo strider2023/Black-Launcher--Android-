@@ -3,6 +3,7 @@ package com.touchmentapps.black;
 import java.util.ArrayList;
 
 import com.touchmentapps.black.adapters.LauncherViewPagerAdapter;
+import com.touchmentapps.black.objects.LauncherApplicationInfo;
 import com.touchmentapps.black.objects.LauncherWidgetInfo;
 
 import android.content.Intent;
@@ -20,7 +21,9 @@ import android.view.MenuItem;
  * @author Arindam Nath
  * 
  */
-public class BlackLauncherActivity extends FragmentActivity implements BlackAllWidgetsMenuFragment.OnWidgetSelectedListener {
+public class BlackLauncherActivity extends FragmentActivity implements 
+	BlackAllWidgetsMenuFragment.OnWidgetSelectedListener,
+	BlackAllAppsMenuFragment.OnPinAppSelectedListener {
 	
 	private static final int REQUEST_PICK_WALLPAPER = 10;
 	
@@ -41,7 +44,9 @@ public class BlackLauncherActivity extends FragmentActivity implements BlackAllW
         mHomeScreen = new BlackHomeScreenFragement();
         mAppsMenu = new BlackAllAppsMenuFragment();
         mWidgetsMenu = new BlackAllWidgetsMenuFragment();
-        
+        mAppsMenu.setHasOptionsMenu(false);
+        mWidgetsMenu.setHasOptionsMenu(false);
+                
         mFragmentObjects.add(mHomeScreen);
         mFragmentObjects.add(mAppsMenu);
         mFragmentObjects.add(mWidgetsMenu);
@@ -78,5 +83,10 @@ public class BlackLauncherActivity extends FragmentActivity implements BlackAllW
 	public void onWidgetSelected(LauncherWidgetInfo selectedItem) {
 		Log.i("Package Name", selectedItem.getPackageName());			
 		mHomeScreen.addWidget(selectedItem);
+	}
+
+	@Override
+	public void onPinAppSelected(LauncherApplicationInfo selectedItem) {
+		mHomeScreen.addApplication(selectedItem);
 	}
 }
